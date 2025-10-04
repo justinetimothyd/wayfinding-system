@@ -71,4 +71,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 =======
 # wayfinding-system
-A wayfinding system for a certain university using A* algorithm
+A wayfinding system for a certain university using A* algorithm. This was originally a web app, converted to a mobile application (I used Android Studio) using Capacitor with React.
