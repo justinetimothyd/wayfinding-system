@@ -1,0 +1,68 @@
+/* src/App.css */
+.App {
+  font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+  color: #202124;
+  overflow: hidden;
+  height: 100vh;
+}
+
+.app-header {
+  background-color: white;
+  color: #5f6368;
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  height: 48px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 100;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+}
+
+.header-title {
+  font-size: 18px;
+  font-weight: 500;
+  margin-left: 8px;
+  color: #5f6368;
+}
+
+main {
+  position: relative;
+  height: calc(100vh - 48px);
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .App {
+    height: 100%;
+    position: fixed;
+    width: 100%;
+  }
+  
+  .app-header {
+    height: 50px;
+    padding: 4px 12px;
+  }
+  
+  .header-title {
+    font-size: 16px;
+  }
+  
+  main {
+    height: calc(100vh - 50px);
+  }
+  
+  @supports (padding: env(safe-area-inset-top)) {
+    .app-header {
+      padding-top: env(safe-area-inset-top);
+    }
+    
+    main {
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+  }
+}

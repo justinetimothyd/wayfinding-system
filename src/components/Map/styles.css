@@ -1,0 +1,344 @@
+/* src/components/Map/styles.css */
+
+.map-container {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  border: 1px solid #e1e1e1;
+  overflow: hidden;
+  margin-top: 1rem;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.campus-map {
+  width: 100%;
+  height: 100%;
+  user-select: none;
+  background-color: #f8f8f8;
+}
+
+/* Floor selector */
+.floor-selector {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 20;
+  display: flex;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  overflow: hidden;
+}
+
+.floor-button {
+  padding: 10px 15px;
+  border: none;
+  background-color: white;
+  color: #5f6368;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.floor-button.active {
+  background-color: #1a73e8;
+  color: white;
+}
+
+.floor-button:not(.active):hover {
+  background-color: #f1f3f4;
+}
+
+.zoom-controls {
+  position: absolute;
+  bottom: 25px;
+  right: 15px;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  overflow: hidden;
+}
+
+.zoom-controls button {
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  cursor: pointer;
+  background-color: white;
+  border: none;
+  padding: 0;
+  color: #333;
+  transition: background-color 0.2s;
+}
+
+.zoom-controls button:first-child {
+  border-bottom: 1px solid #eee;
+}
+
+.zoom-controls button:hover {
+  background-color: #f5f5f5;
+}
+
+/* Hallways and connections */
+.hallway-line {
+  stroke: #ddd;
+  stroke-width: 2;
+}
+
+.connection-line {
+  stroke: #ddd;
+  stroke-width: 1.5;
+  stroke-dasharray: 3,3;
+}
+
+.hallway-point {
+  fill: #ccc;
+  stroke: #aaa;
+  stroke-width: 1;
+}
+
+/* Room styling */
+.room {
+  fill: rgba(255, 255, 255, 0.8);
+  stroke: #999;
+  stroke-width: 1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.room:hover {
+  fill: rgba(220, 240, 255, 0.8);
+  stroke-width: 2;
+  stroke: #4285F4;
+}
+
+.room.current {
+  fill: rgba(66, 133, 244, 0.2);
+  stroke: #4285F4;
+  stroke-width: 2;
+}
+
+.room.destination {
+  fill: rgba(234, 67, 53, 0.2);
+  stroke: #ea4335;
+  stroke-width: 2;
+}
+
+/* Floor transition points (elevators, stairs) */
+.room.floor-transition {
+  fill: rgba(255, 255, 210, 0.8);
+  stroke: #fbbc04;
+  stroke-width: 1.5;
+}
+
+.room.floor-transition:hover {
+  fill: rgba(255, 255, 180, 0.9);
+  stroke: #fbbc04;
+  stroke-width: 2.5;
+}
+
+.floor-transition-icon {
+  fill: #fbbc04;
+  stroke: #fbbc04;
+  stroke-width: 0.5;
+}
+
+.floor-transition-point {
+  fill: #fbbc04;
+  stroke: #fff;
+  stroke-width: 1.5;
+  opacity: 0.9;
+}
+
+.floor-transition-text {
+  font-size: 10px;
+  font-weight: 600;
+  fill: #000;
+  paint-order: stroke;
+  stroke: white;
+  stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Room labels */
+.room-label {
+  font-size: 10px;
+  font-weight: 500;
+  pointer-events: none;
+  fill: #333;
+  paint-order: stroke;
+  stroke: white;
+  stroke-width: 0.5px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.narrow-room-label {
+  font-size: 7px;
+  letter-spacing: -0.5px;
+  font-weight: 600;
+}
+
+/* Path */
+.path-line {
+  fill: none;
+  stroke: #4285F4;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
+}
+
+/* Tooltip */
+.tooltip-container {
+  overflow: visible;
+  pointer-events: none;
+}
+
+.room-tooltip {
+  background-color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.room-tooltip strong {
+  margin-right: 5px;
+  color: #4285F4;
+}
+
+.room-tooltip span {
+  color: #666;
+  font-style: italic;
+  font-size: 11px;
+}
+
+/* Instructions panel */
+.map-instructions {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  background-color: white;
+  padding: 12px 15px;
+  border-radius: 8px;
+  max-width: 300px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  font-size: 14px;
+}
+
+.floor-change-warning {
+  background-color: rgba(251, 188, 4, 0.1);
+  border-left: 3px solid #fbbc04;
+  padding: 6px 8px;
+  margin: 8px 0;
+  font-size: 12px;
+}
+
+.floor-icon {
+  font-weight: bold;
+  color: #fbbc04;
+}
+
+.travel-time {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #eee;
+  display: flex;
+  align-items: center;
+}
+
+.time-icon {
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .map-container {
+    margin-top: 60px;
+    height: calc(100vh - 60px);
+    border: none;
+    border-radius: 0;
+  }
+  
+  .floor-selector {
+    top: 10px;
+    left: 10px;
+  }
+  
+  .floor-button {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  
+  .zoom-controls {
+    bottom: 15px;
+    right: 10px;
+  }
+  
+  .zoom-controls button {
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+  }
+  
+  /* Make touch targets larger */
+  .room {
+    stroke-width: 2;
+  }
+  
+  .room:hover, .room:active, .room.highlight {
+    stroke-width: 2.5;
+  }
+  
+  .room-label {
+    font-size: 9px;
+  }
+  
+  .narrow-room-label {
+    font-size: 6px;
+  }
+  
+  .path-line {
+    stroke-width: 4;
+  }
+  
+  .map-instructions {
+    padding: 12px;
+    max-width: calc(100% - 100px);
+    font-size: 14px;
+    z-index: 5;
+  }
+  
+  .room-tooltip {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+  
+  .campus-map {
+    touch-action: none;
+  }
+  
+  .hallway-line {
+    stroke-width: 3;
+  }
+  
+  .connection-line {
+    stroke-width: 2;
+  }
+  
+  .room.current,
+  .room.destination {
+    stroke-width: 3;
+  }
+}
